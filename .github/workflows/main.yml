@@ -19,6 +19,7 @@ jobs:
        run: aws eks update-kubeconfig --name demo-cluster --region ap-south-1
     -  name: Docker run
        run:
+         docker compose build
          docker compose up
     -  name: Deploy to EKS
        run:
