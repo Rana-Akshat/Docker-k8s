@@ -1,0 +1,25 @@
+name: Docker-compose-app
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: windows-latest
+    steps:
+    -  name: Checkout
+       uses: actions/checkout@v2
+    -  name: Configure AWS credentials
+       uses: aws-actions/configure-aws-credentials@v1
+       with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: ap-south-1
+    -  name: update kube config
+       run: aws eks update-kubeconfig --name demo-cluster --region ap-south-1
+    -  name: Deploy to EKS
+       run:
+         kubectl apply -f frontend-deloyment.yaml
+         kubectl apply -f frontend-service.yaml
+         kubectl apply -f backend-deployment.yaml
+         kubectl apply -f backend-service.yaml
