@@ -25,9 +25,15 @@ jobs:
     -  name: Docker run
        run:
          docker compose build
-    -  name: Deploy to EKS
+    -  name: frontend deployment file
        run:
          kubectl apply -f frontend-deloyment.yaml
+    -  name: frontend service file
+       run:
          kubectl apply -f frontend-service.yaml
+    -  name: backend deployment file
+       run:
          kubectl apply -f backend-deployment.yaml
+    -  name: backend service file
+       run:
          kubectl apply -f backend-service.yaml
