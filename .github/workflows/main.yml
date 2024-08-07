@@ -18,8 +18,10 @@ jobs:
     -  name: update kube config
        run: aws eks update-kubeconfig --name demo-cluster --region ap-south-1
     -  name: Docker login
-       run:
-         docker login -u akshatkd --password @ksHAT2001
+       uses: docker/login-action@v3.3.0
+       with:
+         username: akshatkd
+         password: ${{ secrets.DOCKER_PASS }}
     -  name: Docker run
        run:
          docker compose up
