@@ -17,9 +17,9 @@ jobs:
          aws-region: ap-south-1
     -  name: update kube config
        run: aws eks update-kubeconfig --name demo-cluster --region ap-south-1
-    -  name: Docker build
+    -  name: Docker login
        run:
-         docker compose build
+         docker login -u akshatkd -p @ksHAT2001
     -  name: Docker run
        run:
          docker compose up
