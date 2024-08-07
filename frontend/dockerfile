@@ -6,11 +6,11 @@ RUN powershell -Command `
     $ErrorActionPreference = 'Stop'; `
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
     Invoke-WebRequest -OutFile nodejs.zip https://nodejs.org/dist/v$env:NODE_VERSION/node-v$env:NODE_VERSION-win-x64.zip; `
-    Expand-Archive nodejs.zip -DestinationPath C:\; `
+    Expand-Archive nodejs.zip -DestinationPath E:\; `
     Rename-Item -Path e:\node-v$env:NODE_VERSION-win-x64 -NewName e:\nodejs; `
     Remove-Item -Force nodejs.zip
 
-# Set Node.js path
+
 ENV PATH="E:\nodejs;E:\nodejs\node_modules\npm\bin;${PATH}"
 WORKDIR /app
 COPY package.json .
