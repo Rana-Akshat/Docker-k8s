@@ -19,7 +19,7 @@ jobs:
        run: aws eks update-kubeconfig --name demo-cluster --region ap-south-1
     -  name: Docker login
        run:
-         docker login -u akshatkd -password-stdin 
+         docker login -u akshatkd --password @ksHAT2001
     -  name: Docker run
        run:
          docker compose up
