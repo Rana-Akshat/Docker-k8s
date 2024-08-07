@@ -1,4 +1,4 @@
-FROM node:14.3.0
+FROM node_app:0.0.1.RELEASE
 WORKDIR /app
 COPY package.json .
 RUN npm install
