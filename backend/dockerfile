@@ -1,4 +1,17 @@
-FROM node:current-alpine3.19
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+
+ENV NODE_VERSION 16.15.0
+
+RUN powershell -Command `
+    $ErrorActionPreference = 'Stop'; `
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
+    Invoke-WebRequest -OutFile nodejs.zip https://nodejs.org/dist/v$env:NODE_VERSION/node-v$env:NODE_VERSION-win-x64.zip; `
+    Expand-Archive nodejs.zip -DestinationPath E:\; `
+    Rename-Item -Path e:\node-v$env:NODE_VERSION-win-x64 -NewName e:\nodejs; `
+    Remove-Item -Force nodejs.zip
+
+
+ENV PATH="E:\nodejs;E:\nodejs\node_modules\npm\bin;${PATH}"
 WORKDIR '/app'
 COPY package.json .
 RUN npm install
