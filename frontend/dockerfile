@@ -1,4 +1,4 @@
-FROM node:6-jessie
+FROM node:14.3.0
 WORKDIR /app
 COPY package.json .
 RUN npm install
