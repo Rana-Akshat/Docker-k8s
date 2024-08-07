@@ -1,4 +1,4 @@
-FROM node:6.2.1-wheezy
+FROM node:slim
 WORKDIR '/app'
 COPY package.json .
 RUN npm install
